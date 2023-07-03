@@ -9,12 +9,17 @@ import { HousingService } from '../housing.service';
 })
 export class HomeComponent implements OnInit {
 
-  housingLocationList: HousingLocation[];
-  filteredLocationList: HousingLocation[];
+  housingLocationList: HousingLocation[] = [];
+  filteredLocationList: HousingLocation[] = [];
 
   constructor(private housingService: HousingService) {
-    this.housingLocationList = this.housingService.getAllHousingLoucations();
-    this.filteredLocationList = this.housingLocationList;
+
+    this.housingService.getAllHousingLocations()
+    .then(locations => {
+      this.housingLocationList = locations;
+      this.filteredLocationList = locations;
+    })
+    .catch(error => console.log(error));
    }
 
   ngOnInit(): void {

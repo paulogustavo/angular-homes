@@ -32,7 +32,8 @@ export class DetailsComponent implements OnInit {
 
   getDetail() {
     const id = Number(this.activatedRoute.snapshot.params['id']);
-    this.housingLocation = this.housingService.getHousingLocationById(id);
+    this.housingService.getHousingLocationById(id)
+      .then(location => this.housingLocation = location);
   }
 
   goBack() {
