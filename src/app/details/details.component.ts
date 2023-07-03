@@ -28,4 +28,8 @@ export class DetailsComponent implements OnInit {
     this.housingLocation = this.housingService.getHousingLocationById(id);
   }
 
+  goBack() {
+    this.location.back();
+  }
+
 }
