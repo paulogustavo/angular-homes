@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housinglocation';
 
@@ -12,6 +13,12 @@ import { HousingLocation } from '../housinglocation';
 export class DetailsComponent implements OnInit {
 
   housingLocation: HousingLocation | undefined;
+
+  applyForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    email: new FormControl('')
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,6 +37,14 @@ export class DetailsComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  submitApplication(){
+    this.housingService.submitApplication(
+      this.applyForm.value.firstName ?? '',
+      this.applyForm.value.lastName ?? '',
+      this.applyForm.value.email ?? ''
+    );
   }
 
 }
